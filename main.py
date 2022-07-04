@@ -1,4 +1,6 @@
-from flask import Flask
+from flask import Flask, jsonify
+import nltk
+from nltk.sentiment.vader import SentimentIntensityAnalyzer
 import twint
 import twint.output
 
@@ -38,6 +40,19 @@ def converToDict(list):
                             "date": list[i].datestamp} for i in range(0, len(list), 2)}
     return newDict
 
+@app.route("/sentiment/<string>")
+def sentiment(string):
+    output = {}
+    
+    nltk.download("vader_lexicon")
+    sid = SentimentIntensityAnalyzer()
+    score = sid.polarity_scores(string)["compound"]
+    if score > 0:
+        output["sentiment"] = 'positive'
+    else:
+        output["sentiment"] = 'negative'
+
+    return jsonify(output)
 
 @app.route("/twt")
 def twitScrape():
@@ -89,5 +104,4 @@ def convert(list):
 
 
 if __name__ == "__main__":
-    app.debug = True
-    app.run(host="0.0.0.0", port=8000)
+    app.run()
