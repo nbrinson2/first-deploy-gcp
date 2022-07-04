@@ -46,7 +46,7 @@ six==1.16.0
 soupsieve==2.3.2.post1
 toml==0.10.2
 tqdm==4.64.0
-twint==2.1.21
+twint==2.1.20
 urllib3==1.26.9
 Werkzeug==2.1.2
 yarl==1.7.2
