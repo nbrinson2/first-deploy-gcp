@@ -1,3 +1,7 @@
+# Add git functionality
+FROM ubuntu:latest
+RUN apt-get -y update
+RUN apt-get -y install git
 
 # Use the official lightweight Python image.
 # https://hub.docker.com/_/python
@@ -12,10 +16,6 @@ WORKDIR $APP_HOME
 COPY . ./
 
 # Install production dependencies.
-FROM ubuntu:latest
-RUN apt-get -y update
-RUN apt-get -y install git
-
 RUN pip install --no-cache-dir -r requirements.txt
 RUN pip3 install --user --upgrade -e git+https://github.com/twintproject/twint.git@origin/master#egg=twint
  
