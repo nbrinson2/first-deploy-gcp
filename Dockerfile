@@ -12,6 +12,7 @@ WORKDIR $APP_HOME
 COPY . ./
 
 # Install production dependencies.
+RUN apt-get -y install git
 RUN pip install --no-cache-dir -r requirements.txt
 RUN pip3 install --user --upgrade -e git+https://github.com/twintproject/twint.git@origin/master#egg=twint
  
